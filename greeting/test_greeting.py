@@ -21,6 +21,8 @@ class TestGreet(TestCase):
     def test_concat_array_of_arbitrary_names(self):
         assert greet(["Maksud", "Zimi", "Robert", "Tanvir", "Musa"]) == "Hello, Maksud, Zimi, Robert, Tanvir, and Musa."
 
+    def test_separate_shouting_with_normal_names(self):
+        assert greet(["Amy", "BRIAN", "Charlotte"]) == "Hello, Amy and Charlotte. AND HELLO BRIAN!"
 
     def tearDown(self):
         super(TestGreet, self).tearDown()

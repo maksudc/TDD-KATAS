@@ -3,22 +3,44 @@ def greet(name):
 
     prefix = "Hello, "
 
-    text = None
+    text = ""
     if name:
 
         if isinstance(name, list):
 
-            if len(name) > 1:
-                comma_separated_ones = name[0: len(name)-1]
+            shouting_names = []
+            normal_names = []
+
+            for aname in name:
+                if aname.upper() == aname:
+                    shouting_names.append(aname)
+                else:
+                    normal_names.append(aname)
+
+            if len(normal_names) > 0:
+
+                comma_separated_ones = normal_names[0: len(name)-1]
 
                 text = ", ".join(comma_separated_ones)
 
                 if len(comma_separated_ones) > 1:
                     text += ","
-                    
-                text += " and "
-                text += name[-1]
+
+                if len(normal_names) > 1:
+                    text += " and "
+
+                text += normal_names[-1]
                 text += "."
+
+            for i, ashouting_name in enumerate(shouting_names):
+
+                text += " AND HELLO "
+
+                text += ashouting_name
+                text += "!"
+
+                if i < len(shouting_names)-1:
+                    text += " "
         else:
             text = name
 
