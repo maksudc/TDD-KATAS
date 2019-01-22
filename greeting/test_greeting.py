@@ -27,6 +27,9 @@ class TestGreet(TestCase):
     def test_comma_seprate_names_split(self):
         assert greet(["Bob", "Charlie, Dianne"]) == "Hello, Bob, Charlie, and Dianne."
 
+    def test_escape_character_input(self):
+        assert greet(["Bob", "\"\"Charlie, Dianne\"\""]) == "Hello, Bob and Charlie, Dianne."
+
     def tearDown(self):
         super(TestGreet, self).tearDown()
 

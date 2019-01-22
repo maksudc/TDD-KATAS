@@ -15,13 +15,17 @@ def greet(name):
 
             for aname in name:
 
-                comma_separated_parts = aname.split(",")
-
-                if comma_separated_parts:
-                    for i, extracted_name in enumerate(comma_separated_parts):
-                        extracted_names.append(extracted_name.strip())
+                if "\"\"" in aname:
+                    aname = aname.replace("\"\"", "").strip()
+                    extracted_names.append(aname)
                 else:
-                    extracted_names.append(aname.strip())
+                    comma_separated_parts = aname.split(",")
+
+                    if comma_separated_parts:
+                        for i, extracted_name in enumerate(comma_separated_parts):
+                            extracted_names.append(extracted_name.strip())
+                    else:
+                        extracted_names.append(aname.strip())
 
             name = extracted_names
 
