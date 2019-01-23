@@ -21,5 +21,26 @@ class TestCalculator(TestCase):
         calculator = Calculator()
         assert calculator.add("2,3,4,5,6") == 20
 
+    def test_add_newline_separated_number(self):
+
+        calculator = Calculator()
+        assert calculator.add("1\n2,3") == 6
+
+    def test_invalid_newline_separated_number(self):
+        calculator = Calculator()
+
+        with self.assertRaises(Exception):
+            calculator.add("1,\n2,3")
+
+    def test_default_delimeter_beginning(self):
+        calculator = Calculator()
+        assert calculator.add("//;\n1;2") == 3
+
+    def test_raises_exception_on_negative_number(self):
+
+        calculator = Calculator()
+        with self.assertRaises(Exception):
+            calculator.add("-1,1,-3,4")
+
     def tearDown(self):
         super(TestCalculator, self).tearDown()
