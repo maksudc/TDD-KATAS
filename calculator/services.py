@@ -10,11 +10,19 @@ class Calculator(object):
         if not numbers:
             return 0
 
-        delimeter_char = ","
-
         if numbers.startswith("//"):
-            delimeter_char = "" + numbers[2]
-            numbers = numbers[4:]
+            delimeter_char = ""
+            delimeter_index = 2
+
+            while numbers[delimeter_index] != '\n':
+                delimeter_char += numbers[delimeter_index]
+                delimeter_index += 1
+
+            delimeter_index += 1
+
+            numbers = numbers[delimeter_index:]
+        else:
+            delimeter_char = ","
 
         sum_numbers = 0
 
@@ -28,6 +36,9 @@ class Calculator(object):
             int_number = int(individual_number)
             if int_number < 0:
                 negative_numbers.append(int_number)
+
+            if int_number > 1000:
+                continue
 
             sum_numbers += int_number
 

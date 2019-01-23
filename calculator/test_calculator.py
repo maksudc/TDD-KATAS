@@ -42,5 +42,15 @@ class TestCalculator(TestCase):
         with self.assertRaises(Exception):
             calculator.add("-1,1,-3,4")
 
+    def test_numbers_bigger_than_1000(self):
+
+        calculator = Calculator()
+        assert calculator.add("2,1001, 3") == 5
+
+    def test_multiple_length_delimeter(self):
+
+        calculator = Calculator()
+        assert calculator.add("//***\n1***2***3") == 6
+
     def tearDown(self):
         super(TestCalculator, self).tearDown()
