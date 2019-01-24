@@ -51,7 +51,6 @@ class Calculator(object):
         sum_numbers = 0
 
         combined_regex_delimeter = "|".join(delimeters)
-        print(combined_regex_delimeter)
 
         individual_numbers = re.split(combined_regex_delimeter, numbers)
 
