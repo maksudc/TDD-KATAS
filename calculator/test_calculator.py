@@ -50,7 +50,17 @@ class TestCalculator(TestCase):
     def test_multiple_length_delimeter(self):
 
         calculator = Calculator()
-        assert calculator.add("//***\n1***2***3") == 6
+        assert calculator.add("//[***]\n1***2***3") == 6
+
+    def test_multiple_delimeters(self):
+
+        calculator = Calculator()
+        assert calculator.add("//[*][%]\n1*2%3") == 6
+
+    def test_multiple_char_multiple_delimeters(self):
+
+        calculator = Calculator()
+        assert calculator.add("//[***][%%]\n1***2%%3") == 6
 
     def tearDown(self):
         super(TestCalculator, self).tearDown()

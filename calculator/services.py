@@ -1,3 +1,4 @@
+import re
 
 class Calculator(object):
 
@@ -10,23 +11,49 @@ class Calculator(object):
         if not numbers:
             return 0
 
+        delimeters = []
         if numbers.startswith("//"):
-            delimeter_char = ""
+            entire_delimeter_str = ""
             delimeter_index = 2
 
             while numbers[delimeter_index] != '\n':
-                delimeter_char += numbers[delimeter_index]
+                entire_delimeter_str += numbers[delimeter_index]
                 delimeter_index += 1
 
-            delimeter_index += 1
+            if ('[' in entire_delimeter_str) and (']' in entire_delimeter_str):
 
+                current_br_index = 0
+
+                while current_br_index < len(entire_delimeter_str) and entire_delimeter_str[current_br_index] == '[':
+
+                    current_delim = ""
+                    current_br_index += 1
+
+                    while current_br_index < len(entire_delimeter_str) and entire_delimeter_str[current_br_index] != ']':
+                        if entire_delimeter_str[current_br_index].isalnum():
+                            current_delim += entire_delimeter_str[current_br_index]
+                        else:
+                            current_delim += "\\" + entire_delimeter_str[current_br_index]
+
+                        current_br_index += 1
+
+                    delimeters.append(current_delim)
+                    current_br_index += 1
+            else:
+                delimeters.append(entire_delimeter_str)
+
+            delimeter_index += 1
             numbers = numbers[delimeter_index:]
         else:
-            delimeter_char = ","
+            delimeters.append(",")
+            delimeters.append("\n")
 
         sum_numbers = 0
 
-        individual_numbers = numbers.replace("\n", delimeter_char).split(delimeter_char)
+        combined_regex_delimeter = "|".join(delimeters)
+        print(combined_regex_delimeter)
+
+        individual_numbers = re.split(combined_regex_delimeter, numbers)
 
         negative_numbers = []
         for individual_number in individual_numbers:
