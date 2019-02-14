@@ -20,5 +20,5 @@ class RomanToDecimalService(object):
         if num in self.thresholds:
             return self.symbols[num]
 
-        
+
 
