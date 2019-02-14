@@ -26,12 +26,13 @@ class TestRomanToDecimal(TestCase):
         assert service.convert(500) == 'D'
         assert service.convert(1000) == 'M'
 
-    # def test_get_upto_three(self):
-    #
-    #     service = RomanToDecimalService()
-    #
-    #     assert service.convert(2) == "II"
-    #     assert service.convert(3) == "III"
+    def test_get_within_five(self):
+
+        service = RomanToDecimalService()
+
+        assert service.convert(2) == "II"
+        assert service.convert(3) == "III"
+        assert service.convert(4) == "IV"
 
     def tearDown(self):
         super(TestRomanToDecimal, self).tearDown()

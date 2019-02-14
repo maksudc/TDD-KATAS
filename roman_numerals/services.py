@@ -20,5 +20,15 @@ class RomanToDecimalService(object):
         if num in self.thresholds:
             return self.symbols[num]
 
+        result = ""
+        if (num / 5) < 1:
+
+            if num < 5 - 1:
+                for _ in range(num):
+                    result += self.symbols[1]
+            else:
+                return self.symbols[1] + self.symbols[5]
+
+        return result
 
 
