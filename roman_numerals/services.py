@@ -1,3 +1,5 @@
+import math
+
 
 class RomanToDecimalService(object):
 
@@ -15,19 +17,39 @@ class RomanToDecimalService(object):
             1000: "M"
         }
 
+        self.symbols.update({
+            4: "IV",
+            9: "IX",
+            40: "XL",
+            90: "XC",
+            400: "CD",
+            900: "CM"
+        })
+
     def convert(self, num):
 
-        if num in self.thresholds:
+        if num in self.symbols.keys():
             return self.symbols[num]
 
         result = ""
-        if (num / 5) < 1:
 
-            if num < 5 - 1:
-                for _ in range(num):
-                    result += self.symbols[1]
-            else:
-                return self.symbols[1] + self.symbols[5]
+        for i, threshold in enumerate(reversed(self.thresholds)):
+
+            div_result = int(math.floor(num / threshold))
+            if div_result >= 1:
+
+                deduction = div_result * threshold
+
+                if deduction in self.symbols.keys():
+                    result += self.symbols[deduction]
+                else:
+                    for _ in range(div_result):
+                        result += self.symbols[threshold]
+
+                remaining_num = (num - deduction)
+
+                result += self.convert(remaining_num)
+                break
 
         return result
 
