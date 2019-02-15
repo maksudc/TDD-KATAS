@@ -36,9 +36,9 @@ class RomanToDecimalService(object):
         for i, threshold in enumerate(reversed(self.thresholds)):
 
             div_result = int(math.floor(num / threshold))
-            if div_result >= 1:
+            deduction = div_result * threshold
 
-                deduction = div_result * threshold
+            if div_result >= 1:
 
                 if deduction in self.symbols.keys():
                     result += self.symbols[deduction]

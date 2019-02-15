@@ -51,6 +51,35 @@ class TestRomanToDecimal(TestCase):
         assert service.convert(45) == "XLV"
         assert service.convert(50) == "L"
 
+    def test_get_within_100(self):
+
+        service = RomanToDecimalService()
+        assert service.convert(55) == "LV"
+        assert service.convert(70) == "LXX"
+        assert service.convert(79) == 'LXXIX'
+        assert service.convert(89) == "LXXXIX"
+        assert service.convert(90) == "XC"
+
+    def test_get_within_500(self):
+
+        service = RomanToDecimalService()
+        assert service.convert(120) == "CXX"
+        assert service.convert(140) == "CXL"
+        assert service.convert(150) == "CL"
+        assert service.convert(340) == 'CCCXL'
+        assert service.convert(400) == 'CD'
+        assert service.convert(440) == "CDXL"
+        assert service.convert(490) == "CDXC"
+
+    def test_get_within_1000(self):
+
+        service = RomanToDecimalService()
+        assert service.convert(678) == "DCLXXVIII"
+        assert service.convert(800) == "DCCC"
+        assert service.convert(840) == "DCCCXL"
+        assert service.convert(900) == "CM"
+        assert service.convert(990) == "CMXC"
+
     def tearDown(self):
         super(TestRomanToDecimal, self).tearDown()
 
